@@ -2,13 +2,13 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="_14520404_Paint.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="undoTimes" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">3</Value>
+    <Setting Name="pen_witdh" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
     </Setting>
-    <Setting Name="sizeInitWidth" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">300</Value>
+    <Setting Name="panel_width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">400</Value>
     </Setting>
-    <Setting Name="sizeInitHeight" Type="System.Int32" Scope="User">
+    <Setting Name="panel_heigh" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">300</Value>
     </Setting>
   </Settings>

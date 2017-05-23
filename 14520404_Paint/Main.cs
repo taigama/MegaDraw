@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 
 namespace _14520404_Paint
 {
@@ -23,76 +24,24 @@ namespace _14520404_Paint
         public Main()
         {
             InitializeComponent();
-            this.pnPaint.host = this;
+            
+            pnDrawing.Init(this);
 
-            //bitmap = new Bitmap(pnPaint.Width, pnPaint.Height);
+            LoadSetting();
+        }
+
+        private void LoadSetting()
+        {
+            toolItemCbSize.SelectedIndex = 10;
+            
         }
 
         private void toolItemBtnNew_Click(object sender, EventArgs e)
         {
-            InitDrawPanel();
-        }
-
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            //pointLast = new Point(e.X, e.Y);
-
-            //isPaint = true;
-
-
-            //LoadSizeBrush();
-            
-
-            //// chấm 1 cái
-            //Graphics g1 = pnPaint.CreateGraphics();
-            //g1.FillEllipse(brush, e.X - (sizeBrush / 2), e.Y - (sizeBrush / 2), sizeBrush, sizeBrush);
-            //g1.Dispose();
-
-            //pnPaint.Invalidate();
-        }
-
-        private void panel1_MouseUp(object sender, MouseEventArgs e)
-        {
-            //isPaint = false;
-            //isResize = false;
-
-            //pointLast = pointInvalid;
+            pnDrawing.Init(this);
         }
 
         
-
-        //System.Drawing.Pen myPen;
-        //Graphics g1;
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
-        {
-            
-
-
-
-            //if (isPaint)
-            //{
-            //    using (g1 = Graphics.FromImage(bitmap))
-            //    {
-
-            //        myPen = new Pen(brush);
-
-            //        g1.FillEllipse(brush, e.X - (sizeBrush / 2), e.Y - (sizeBrush / 2), sizeBrush, sizeBrush);
-
-            //        //myPen = new System.Drawing.Pen(System.Drawing.Color.Red);
-
-            //        myPen.Width = sizeBrush;
-            //        g1.DrawLine(myPen, pointLast.X, pointLast.Y, e.X, e.Y);
-
-            //        //myPen.Dispose();
-            //        //g1.Dispose();
-
-                    
-            //        pointLast = new Point(e.X, e.Y);
-            //    }
-            //    pnPaint.Invalidate();
-            //}
-            //statusItemMousePost.Text = MousePost(e.X, e.Y);
-        }
 
         #region Hàm hỗ trợ
         public ToolStripStatusLabel GetStatusItemMousePost()
@@ -105,36 +54,42 @@ namespace _14520404_Paint
             return "Mouse  X: " + X + "  Y: " + Y;
         }
 
-        void InitDrawPanel()
+        public void ShowMousePost(int X, int Y)
         {
-            //Graphics g1 = Graphics.FromImage(bitmap);
-            //g1.Clear(Color.White);
-            //pnPaint.Invalidate();
+            statusItemMousePost.Text = MousePost(X, Y);
         }
 
         #endregion
 
-        private void pnPaint_Paint(object sender, PaintEventArgs e)
-        {
-            //e.Graphics.DrawImage(bitmap, Point.Empty);
-            //InitDrawPanel();
-        }
-
         private void toolItemColor_Click(object sender, EventArgs e)
         {
+            bool isFill = (sender == toolItemColorFill);
             // mở dialog chọn màu ---
 
             //  khởi tạo
             ColorDialog colorDialog = new ColorDialog();
             //  lấy màu hiện tại làm màu đang được chọn trong dialog
-            colorDialog.Color = pnPaint.brushMain.Color;
-            // mở dialog
-            colorDialog.ShowDialog();
+            //colorDialog.Color = ucDrawing.pnPaint.brushMain.Color;
 
-            // sau khi đóng dialog, màu của brush sẽ thành màu được chọn
-            pnPaint.brushMain.Color = colorDialog.Color;
+            //colorDialog.Color = pnDrawing.penCustom.brushSolid.Color;
 
+            if (!isFill)
+            {
+                colorDialog.Color = pnDrawing.penCustom.colorFront;
 
+                // mở dialog
+                colorDialog.ShowDialog();
+
+                // sau khi đóng dialog, màu của brush sẽ thành màu được chọn
+                this.pnDrawing.penCustom.colorFront = colorDialog.Color;
+            }
+            else
+            {
+                colorDialog.Color = pnDrawing.penCustom.colorBack;
+                
+                colorDialog.ShowDialog();
+                this.pnDrawing.penCustom.colorBack = colorDialog.Color;
+            }
 
             // vẽ hình vào button chọn màu ---
 
@@ -146,48 +101,63 @@ namespace _14520404_Paint
 
             // vẽ vào bitmap
             flagGraphics.FillRectangle(Brushes.Black, 0, 0, 32, 32);
-            flagGraphics.FillRectangle(pnPaint.brushMain, 2, 2, 28, 28);
+            flagGraphics.FillRectangle(new SolidBrush(colorDialog.Color), 2, 2, 28, 28);
 
             // đổi hình của cái button
-            toolItemColor.Image = imgBtn;
+            ((ToolStripButton)sender).Image = imgBtn;
         }
 
         private void toolItemBtnSave_Click(object sender, EventArgs e)
         {
-            
+            SaveImage();
+        }
 
-            //SaveFileDialog saveDialog = new SaveFileDialog();
-            //saveDialog.FileName = "myImage";
-            //saveDialog.DefaultExt = "png";
-            //saveDialog.Filter = "PNG image (*.png)|*.png";
+        private bool SaveImage()
+        {
+            try
+            {
+                SaveFileDialog saveDialog = new SaveFileDialog();
+                saveDialog.FileName = "myImage";
+                saveDialog.DefaultExt = "png";
+                saveDialog.Filter = "PNG image (*.png)|*.png";
 
-            //if (saveDialog.ShowDialog() == DialogResult.OK)
-            //{                
-            //    bitmap.Save(saveDialog.FileName, ImageFormat.Png);
-            //}
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    pnDrawing.image.Save(saveDialog.FileName, ImageFormat.Png);
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         private void toolItemBtnOpen_Click(object sender, EventArgs e)
         {
-            //OpenFileDialog openDialog = new OpenFileDialog();
-            //openDialog.Filter = "JPG image (*.jpg)|*.jpg|PNG image (*.png)|*.png";
+            OpenImage();
+        }
 
-            //if(openDialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    bitmap = new Bitmap(openDialog.FileName);
+        private bool OpenImage()
+        {
+            try
+            {
+                OpenFileDialog openDialog = new OpenFileDialog();
+                openDialog.Filter = "image file|*.bmp;*.jpg;*.jpeg;*.png";
 
+                if (openDialog.ShowDialog() == DialogResult.OK)
+                {                    
+                    pnDrawing.imageCustom.GetImage(new Bitmap(openDialog.FileName), pnDrawing);                    
 
-            //    Graphics hostGraphic = this.CreateGraphics();
-
-            //    // WARNING!!! Không có cái này: với các máy có DPI bình thường sẽ không sao hết
-            //    // với các máy sử dụng scaled DPI sẽ gặp rắc rối rất lớn
-            //    //  (vd: hình load vào nhỏ hơn khung, brush bị lệch toạ độ)
-            //    bitmap.SetResolution(hostGraphic.DpiX, hostGraphic.DpiY);
-                
-            //    pnPaint.Size = bitmap.Size;
-            //    pnPaint.Invalidate();
-            //}
-
+                    pnDrawing.Size = pnDrawing.image.Size;
+                    pnDrawing.Invalidate();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         void LoadSizeBrush()
@@ -195,19 +165,106 @@ namespace _14520404_Paint
             // load size brush
             try
             {
-                pnPaint.sizeBrush = int.Parse(toolItemCbSize.Text);
+                pnDrawing.penCustom.sizeBrush = int.Parse(toolItemCbSize.Text);
+                // ucDrawing.pnPaint.sizeBrush = int.Parse(toolItemCbSize.Text);
             }
             catch (Exception ex)
             {
-                pnPaint.sizeBrush = 1;
+                pnDrawing.penCustom.sizeBrush = 5;
+                // ucDrawing.pnPaint.sizeBrush = 1;
             }
         }
 
         //bool dropDownHandler = true;
 
+        private void ChangeIconSplitButton(ToolStripMenuItem source, ToolStripDropDownItem target)
+        {
+            target.Image = source.Image;
+        }
+
         private void toolItemCbSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadSizeBrush();
+        }
+
+        #region draw type
+        private void itemDotSquare_Click(object sender, EventArgs e)
+        {
+            pnDrawing.SetSharp(DRAW_TYPE.dotSquare);
+
+            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+        }
+
+        private void itemDotCircle_Click(object sender, EventArgs e)
+        {
+            pnDrawing.SetSharp(DRAW_TYPE.dotCircle);
+
+            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+        }
+
+
+        private void itemLine_Click(object sender, EventArgs e)
+        {
+            pnDrawing.SetSharp(DRAW_TYPE.line);
+
+            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+        }
+
+        private void itemRectangle_Click(object sender, EventArgs e)
+        {
+            pnDrawing.SetSharp(DRAW_TYPE.rectangle);
+
+            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+        }
+
+        private void itemEclipse_Click(object sender, EventArgs e)
+        {
+            pnDrawing.SetSharp(DRAW_TYPE.eclipse);
+
+            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+        }
+        #endregion
+
+        private void toolItemSetting_Click(object sender, EventArgs e)
+        {
+            Setting setting = new Setting();
+
+            if (setting.ShowDialog() == DialogResult.OK)
+            {
+                pnDrawing.imageCustom.Resize(Properties.Settings.Default.panel_width, Properties.Settings.Default.panel_heigh);
+                pnDrawing.Size = pnDrawing.image.Size;
+
+                pnDrawing.Invalidate();
+            }
+        }
+
+
+        // Key handler
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case (Keys.Control | Keys.O):
+                    return OpenImage();
+                case (Keys.Control | Keys.S):
+                    return SaveImage();
+                case (Keys.Control | Keys.N):
+                    pnDrawing.Init(this);
+                    return true;
+                case (Keys.Control | Keys.Z):
+                    {
+                        bool returner = pnDrawing.imageCustom.Undo();
+                        pnDrawing.Invalidate();
+                        return returner;
+                    }
+                case (Keys.Control | Keys.Y):
+                    {
+                        bool returner = pnDrawing.imageCustom.Redo();
+                        pnDrawing.Invalidate();
+                        return returner;
+                    }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

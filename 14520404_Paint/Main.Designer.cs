@@ -36,6 +36,7 @@ namespace _14520404_Paint
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolItemSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolItemBtnOpen = new System.Windows.Forms.ToolStripButton();
@@ -43,20 +44,28 @@ namespace _14520404_Paint
             this.toolItemBtnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolItemCbSize = new System.Windows.Forms.ToolStripComboBox();
+            this.toolItemDrawType = new System.Windows.Forms.ToolStripDropDownButton();
+            this.itemDotSquare = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemDotCircle = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.itemLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.itemRectangle = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemEclipse = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolItemColorLine = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolItemColorFill = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolItemColor = new System.Windows.Forms.ToolStripButton();
+            this.toolItemFill = new System.Windows.Forms.ToolStripDropDownButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusItemMousePost = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnBackGround = new System.Windows.Forms.Panel();
-            this.ucDrawing2 = new _14520404_Paint.ucDrawing();
-            this.ucDrawing1 = new _14520404_Paint.ucDrawing();
-            this.pnPaint = new _14520404_Paint.PanelK();
             this.pnDrawing = new _14520404_Paint.PanelDrawing();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pnBackGround.SuspendLayout();
-            this.pnPaint.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -73,9 +82,19 @@ namespace _14520404_Paint
             // 
             // menuItemFile
             // 
+            this.menuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolItemSetting});
             this.menuItemFile.Name = "menuItemFile";
             this.menuItemFile.Size = new System.Drawing.Size(44, 24);
             this.menuItemFile.Text = "File";
+            // 
+            // toolItemSetting
+            // 
+            this.toolItemSetting.Image = ((System.Drawing.Image)(resources.GetObject("toolItemSetting.Image")));
+            this.toolItemSetting.Name = "toolItemSetting";
+            this.toolItemSetting.Size = new System.Drawing.Size(131, 26);
+            this.toolItemSetting.Text = "Setting";
+            this.toolItemSetting.Click += new System.EventHandler(this.toolItemSetting_Click);
             // 
             // menuItemAbout
             // 
@@ -92,8 +111,13 @@ namespace _14520404_Paint
             this.toolItemBtnSave,
             this.toolStripSeparator1,
             this.toolItemCbSize,
-            this.toolStripSeparator2,
-            this.toolItemColor});
+            this.toolItemDrawType,
+            this.toolStripSeparator3,
+            this.toolItemColorLine,
+            this.toolStripSeparator6,
+            this.toolItemFill,
+            this.toolItemColorFill,
+            this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(853, 35);
@@ -161,23 +185,119 @@ namespace _14520404_Paint
             this.toolItemCbSize.ToolTipText = "Size of brush";
             this.toolItemCbSize.SelectedIndexChanged += new System.EventHandler(this.toolItemCbSize_SelectedIndexChanged);
             // 
+            // toolItemDrawType
+            // 
+            this.toolItemDrawType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolItemDrawType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.itemDotSquare,
+            this.itemDotCircle,
+            this.toolStripSeparator4,
+            this.itemLine,
+            this.toolStripSeparator5,
+            this.itemRectangle,
+            this.itemEclipse});
+            this.toolItemDrawType.Image = ((System.Drawing.Image)(resources.GetObject("toolItemDrawType.Image")));
+            this.toolItemDrawType.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolItemDrawType.Name = "toolItemDrawType";
+            this.toolItemDrawType.Size = new System.Drawing.Size(42, 32);
+            this.toolItemDrawType.ToolTipText = "Choose draw type";
+            // 
+            // itemDotSquare
+            // 
+            this.itemDotSquare.Image = ((System.Drawing.Image)(resources.GetObject("itemDotSquare.Image")));
+            this.itemDotSquare.Name = "itemDotSquare";
+            this.itemDotSquare.Size = new System.Drawing.Size(159, 26);
+            this.itemDotSquare.Text = "Dot Square";
+            this.itemDotSquare.Click += new System.EventHandler(this.itemDotSquare_Click);
+            // 
+            // itemDotCircle
+            // 
+            this.itemDotCircle.Image = ((System.Drawing.Image)(resources.GetObject("itemDotCircle.Image")));
+            this.itemDotCircle.Name = "itemDotCircle";
+            this.itemDotCircle.Size = new System.Drawing.Size(159, 26);
+            this.itemDotCircle.Text = "Dot";
+            this.itemDotCircle.Click += new System.EventHandler(this.itemDotCircle_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(156, 6);
+            // 
+            // itemLine
+            // 
+            this.itemLine.Image = ((System.Drawing.Image)(resources.GetObject("itemLine.Image")));
+            this.itemLine.Name = "itemLine";
+            this.itemLine.Size = new System.Drawing.Size(159, 26);
+            this.itemLine.Text = "Line";
+            this.itemLine.Click += new System.EventHandler(this.itemLine_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(156, 6);
+            // 
+            // itemRectangle
+            // 
+            this.itemRectangle.Image = ((System.Drawing.Image)(resources.GetObject("itemRectangle.Image")));
+            this.itemRectangle.Name = "itemRectangle";
+            this.itemRectangle.Size = new System.Drawing.Size(159, 26);
+            this.itemRectangle.Text = "Rectangle";
+            this.itemRectangle.Click += new System.EventHandler(this.itemRectangle_Click);
+            // 
+            // itemEclipse
+            // 
+            this.itemEclipse.Image = ((System.Drawing.Image)(resources.GetObject("itemEclipse.Image")));
+            this.itemEclipse.Name = "itemEclipse";
+            this.itemEclipse.Size = new System.Drawing.Size(159, 26);
+            this.itemEclipse.Text = "Eclipse";
+            this.itemEclipse.Click += new System.EventHandler(this.itemEclipse_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 35);
+            // 
+            // toolItemColorLine
+            // 
+            this.toolItemColorLine.BackColor = System.Drawing.Color.White;
+            this.toolItemColorLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("toolItemColorLine.BackgroundImage")));
+            this.toolItemColorLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolItemColorLine.ForeColor = System.Drawing.Color.Black;
+            this.toolItemColorLine.Image = ((System.Drawing.Image)(resources.GetObject("toolItemColorLine.Image")));
+            this.toolItemColorLine.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.toolItemColorLine.Name = "toolItemColorLine";
+            this.toolItemColorLine.Size = new System.Drawing.Size(32, 32);
+            this.toolItemColorLine.Text = "Pick color for brush";
+            this.toolItemColorLine.Click += new System.EventHandler(this.toolItemColor_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 35);
+            // 
+            // toolItemColorFill
+            // 
+            this.toolItemColorFill.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolItemColorFill.Image = ((System.Drawing.Image)(resources.GetObject("toolItemColorFill.Image")));
+            this.toolItemColorFill.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolItemColorFill.Name = "toolItemColorFill";
+            this.toolItemColorFill.Size = new System.Drawing.Size(32, 32);
+            this.toolItemColorFill.Text = "Pick color for filling";
+            this.toolItemColorFill.Click += new System.EventHandler(this.toolItemColor_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
             // 
-            // toolItemColor
+            // toolItemFill
             // 
-            this.toolItemColor.BackColor = System.Drawing.Color.White;
-            this.toolItemColor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("toolItemColor.BackgroundImage")));
-            this.toolItemColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolItemColor.ForeColor = System.Drawing.Color.Black;
-            this.toolItemColor.Image = ((System.Drawing.Image)(resources.GetObject("toolItemColor.Image")));
-            this.toolItemColor.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.toolItemColor.Name = "toolItemColor";
-            this.toolItemColor.Size = new System.Drawing.Size(32, 32);
-            this.toolItemColor.Text = "Pick a color for brush";
-            this.toolItemColor.Click += new System.EventHandler(this.toolItemColor_Click);
+            this.toolItemFill.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolItemFill.Image = ((System.Drawing.Image)(resources.GetObject("toolItemFill.Image")));
+            this.toolItemFill.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolItemFill.Name = "toolItemFill";
+            this.toolItemFill.Size = new System.Drawing.Size(42, 32);
+            this.toolItemFill.Text = "Choose Filling";
             // 
             // statusStrip1
             // 
@@ -201,9 +321,7 @@ namespace _14520404_Paint
             // 
             this.pnBackGround.AutoScroll = true;
             this.pnBackGround.BackColor = System.Drawing.Color.Silver;
-            this.pnBackGround.Controls.Add(this.ucDrawing2);
-            this.pnBackGround.Controls.Add(this.ucDrawing1);
-            this.pnBackGround.Controls.Add(this.pnPaint);
+            this.pnBackGround.Controls.Add(this.pnDrawing);
             this.pnBackGround.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnBackGround.ForeColor = System.Drawing.Color.Black;
             this.pnBackGround.Location = new System.Drawing.Point(0, 63);
@@ -211,43 +329,14 @@ namespace _14520404_Paint
             this.pnBackGround.Size = new System.Drawing.Size(853, 513);
             this.pnBackGround.TabIndex = 4;
             // 
-            // ucDrawing2
-            // 
-            this.ucDrawing2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ucDrawing2.BackColor = System.Drawing.Color.Black;
-            this.ucDrawing2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.ucDrawing2.Location = new System.Drawing.Point(344, 32);
-            this.ucDrawing2.Name = "ucDrawing2";
-            this.ucDrawing2.Size = new System.Drawing.Size(462, 401);
-            this.ucDrawing2.TabIndex = 4;
-            // 
-            // ucDrawing1
-            // 
-            this.ucDrawing1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ucDrawing1.BackColor = System.Drawing.Color.Transparent;
-            this.ucDrawing1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.ucDrawing1.Location = new System.Drawing.Point(309, 5);
-            this.ucDrawing1.Name = "ucDrawing1";
-            this.ucDrawing1.Size = new System.Drawing.Size(532, 467);
-            this.ucDrawing1.TabIndex = 0;
-            // 
-            // pnPaint
-            // 
-            this.pnPaint.BackColor = System.Drawing.Color.Transparent;
-            this.pnPaint.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnPaint.Controls.Add(this.pnDrawing);
-            this.pnPaint.Location = new System.Drawing.Point(3, 3);
-            this.pnPaint.Name = "pnPaint";
-            this.pnPaint.Size = new System.Drawing.Size(300, 300);
-            this.pnPaint.TabIndex = 3;
-            // 
             // pnDrawing
             // 
-            this.pnDrawing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnDrawing.Location = new System.Drawing.Point(0, 0);
+            this.pnDrawing.BackColor = System.Drawing.Color.Transparent;
+            this.pnDrawing.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnDrawing.BackgroundImage")));
+            this.pnDrawing.Location = new System.Drawing.Point(3, 3);
             this.pnDrawing.Name = "pnDrawing";
-            this.pnDrawing.Size = new System.Drawing.Size(296, 296);
-            this.pnDrawing.TabIndex = 4;
+            this.pnDrawing.Size = new System.Drawing.Size(713, 100);
+            this.pnDrawing.TabIndex = 5;
             // 
             // Main
             // 
@@ -267,7 +356,6 @@ namespace _14520404_Paint
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.pnBackGround.ResumeLayout(false);
-            this.pnPaint.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,18 +369,28 @@ namespace _14520404_Paint
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolItemBtnNew;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private _14520404_Paint.PanelK pnPaint;
         private System.Windows.Forms.ToolStripStatusLabel statusItemMousePost;
-        private System.Windows.Forms.Panel pnBackGround;
         private ToolStripButton toolItemBtnOpen;
         private ToolStripButton toolItemBtnSave;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripComboBox toolItemCbSize;
-        private ToolStripButton toolItemColor;
+        private ToolStripButton toolItemColorLine;
         private ToolStripSeparator toolStripSeparator2;
-        private _14520404_Paint.PanelDrawing pnDrawing;
-        private ucDrawing ucDrawing1;
-        private ucDrawing ucDrawing2;
+        public Panel pnBackGround;
+        private PanelDrawing pnDrawing;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripMenuItem toolItemSetting;
+        private ToolStripButton toolItemColorFill;
+        private ToolStripDropDownButton toolItemDrawType;
+        private ToolStripMenuItem itemDotSquare;
+        private ToolStripMenuItem itemDotCircle;
+        private ToolStripMenuItem itemLine;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripMenuItem itemRectangle;
+        private ToolStripMenuItem itemEclipse;
+        private ToolStripDropDownButton toolItemFill;
     }
     
 

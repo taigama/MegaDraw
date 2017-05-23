@@ -25,37 +25,37 @@ namespace _14520404_Paint.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int undoTimes {
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int pen_witdh {
             get {
-                return ((int)(this["undoTimes"]));
+                return ((int)(this["pen_witdh"]));
             }
             set {
-                this["undoTimes"] = value;
+                this["pen_witdh"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        public int panel_width {
+            get {
+                return ((int)(this["panel_width"]));
+            }
+            set {
+                this["panel_width"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
-        public int sizeInitWidth {
+        public int panel_heigh {
             get {
-                return ((int)(this["sizeInitWidth"]));
+                return ((int)(this["panel_heigh"]));
             }
             set {
-                this["sizeInitWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("300")]
-        public int sizeInitHeight {
-            get {
-                return ((int)(this["sizeInitHeight"]));
-            }
-            set {
-                this["sizeInitHeight"] = value;
+                this["panel_heigh"] = value;
             }
         }
     }
