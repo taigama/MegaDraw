@@ -61,5 +61,23 @@ namespace _14520404_Paint
             DialogResult = DialogResult.OK;
             return true;
         }
+
+        private void btnTexture_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openDialog = new OpenFileDialog();
+                openDialog.Filter = "image file|*.bmp;*.jpg;*.jpeg;*.png";
+
+                if (openDialog.ShowDialog() == DialogResult.OK)
+                {
+                    btnTexture.BackgroundImage = new Bitmap(openDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid Image!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

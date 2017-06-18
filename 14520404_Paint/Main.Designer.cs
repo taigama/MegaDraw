@@ -33,6 +33,7 @@ namespace _14520404_Paint
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuItemFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,20 +53,38 @@ namespace _14520404_Paint
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.itemRectangle = new System.Windows.Forms.ToolStripMenuItem();
             this.itemEclipse = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.itemPolygon = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.lbColorLine = new System.Windows.Forms.ToolStripLabel();
             this.toolItemColorLine = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.lbColorFill = new System.Windows.Forms.ToolStripLabel();
             this.toolItemColorFill = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolItemFill = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolItemFillMode = new System.Windows.Forms.ToolStripDropDownButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusItemMousePost = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnBackGround = new System.Windows.Forms.Panel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolMenuItemUndo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolMenuItemRedo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.sliderAlphaFill = new System.Windows.Forms.TrackBar();
+            this.sliderAlphaLine = new System.Windows.Forms.TrackBar();
             this.pnDrawing = new _14520404_Paint.PanelDrawing();
+            this.itemFillSolid = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemFillGradient = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemFillHatch = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemFillTexture = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pnBackGround.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderAlphaFill)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderAlphaLine)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -113,11 +132,13 @@ namespace _14520404_Paint
             this.toolItemCbSize,
             this.toolItemDrawType,
             this.toolStripSeparator3,
+            this.lbColorLine,
             this.toolItemColorLine,
             this.toolStripSeparator6,
-            this.toolItemFill,
+            this.lbColorFill,
             this.toolItemColorFill,
-            this.toolStripSeparator2});
+            this.toolStripSeparator2,
+            this.toolItemFillMode});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(853, 35);
@@ -195,7 +216,9 @@ namespace _14520404_Paint
             this.itemLine,
             this.toolStripSeparator5,
             this.itemRectangle,
-            this.itemEclipse});
+            this.itemEclipse,
+            this.toolStripSeparator7,
+            this.itemPolygon});
             this.toolItemDrawType.Image = ((System.Drawing.Image)(resources.GetObject("toolItemDrawType.Image")));
             this.toolItemDrawType.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolItemDrawType.Name = "toolItemDrawType";
@@ -206,7 +229,7 @@ namespace _14520404_Paint
             // 
             this.itemDotSquare.Image = ((System.Drawing.Image)(resources.GetObject("itemDotSquare.Image")));
             this.itemDotSquare.Name = "itemDotSquare";
-            this.itemDotSquare.Size = new System.Drawing.Size(159, 26);
+            this.itemDotSquare.Size = new System.Drawing.Size(189, 34);
             this.itemDotSquare.Text = "Dot Square";
             this.itemDotSquare.Click += new System.EventHandler(this.itemDotSquare_Click);
             // 
@@ -214,33 +237,33 @@ namespace _14520404_Paint
             // 
             this.itemDotCircle.Image = ((System.Drawing.Image)(resources.GetObject("itemDotCircle.Image")));
             this.itemDotCircle.Name = "itemDotCircle";
-            this.itemDotCircle.Size = new System.Drawing.Size(159, 26);
+            this.itemDotCircle.Size = new System.Drawing.Size(189, 34);
             this.itemDotCircle.Text = "Dot";
             this.itemDotCircle.Click += new System.EventHandler(this.itemDotCircle_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(186, 6);
             // 
             // itemLine
             // 
             this.itemLine.Image = ((System.Drawing.Image)(resources.GetObject("itemLine.Image")));
             this.itemLine.Name = "itemLine";
-            this.itemLine.Size = new System.Drawing.Size(159, 26);
+            this.itemLine.Size = new System.Drawing.Size(189, 34);
             this.itemLine.Text = "Line";
             this.itemLine.Click += new System.EventHandler(this.itemLine_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(186, 6);
             // 
             // itemRectangle
             // 
             this.itemRectangle.Image = ((System.Drawing.Image)(resources.GetObject("itemRectangle.Image")));
             this.itemRectangle.Name = "itemRectangle";
-            this.itemRectangle.Size = new System.Drawing.Size(159, 26);
+            this.itemRectangle.Size = new System.Drawing.Size(189, 34);
             this.itemRectangle.Text = "Rectangle";
             this.itemRectangle.Click += new System.EventHandler(this.itemRectangle_Click);
             // 
@@ -248,14 +271,33 @@ namespace _14520404_Paint
             // 
             this.itemEclipse.Image = ((System.Drawing.Image)(resources.GetObject("itemEclipse.Image")));
             this.itemEclipse.Name = "itemEclipse";
-            this.itemEclipse.Size = new System.Drawing.Size(159, 26);
+            this.itemEclipse.Size = new System.Drawing.Size(189, 34);
             this.itemEclipse.Text = "Eclipse";
             this.itemEclipse.Click += new System.EventHandler(this.itemEclipse_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(186, 6);
+            // 
+            // itemPolygon
+            // 
+            this.itemPolygon.Image = ((System.Drawing.Image)(resources.GetObject("itemPolygon.Image")));
+            this.itemPolygon.Name = "itemPolygon";
+            this.itemPolygon.Size = new System.Drawing.Size(189, 34);
+            this.itemPolygon.Text = "Polygon";
+            this.itemPolygon.Click += new System.EventHandler(this.itemPolygon_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 35);
+            // 
+            // lbColorLine
+            // 
+            this.lbColorLine.Name = "lbColorLine";
+            this.lbColorLine.Size = new System.Drawing.Size(74, 32);
+            this.lbColorLine.Text = "Line color";
             // 
             // toolItemColorLine
             // 
@@ -275,6 +317,12 @@ namespace _14520404_Paint
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 35);
             // 
+            // lbColorFill
+            // 
+            this.lbColorFill.Name = "lbColorFill";
+            this.lbColorFill.Size = new System.Drawing.Size(66, 32);
+            this.lbColorFill.Text = "Fill color";
+            // 
             // toolItemColorFill
             // 
             this.toolItemColorFill.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -290,14 +338,19 @@ namespace _14520404_Paint
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
             // 
-            // toolItemFill
+            // toolItemFillMode
             // 
-            this.toolItemFill.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolItemFill.Image = ((System.Drawing.Image)(resources.GetObject("toolItemFill.Image")));
-            this.toolItemFill.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolItemFill.Name = "toolItemFill";
-            this.toolItemFill.Size = new System.Drawing.Size(42, 32);
-            this.toolItemFill.Text = "Choose Filling";
+            this.toolItemFillMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolItemFillMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.itemFillSolid,
+            this.itemFillGradient,
+            this.itemFillHatch,
+            this.itemFillTexture});
+            this.toolItemFillMode.Image = ((System.Drawing.Image)(resources.GetObject("toolItemFillMode.Image")));
+            this.toolItemFillMode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolItemFillMode.Name = "toolItemFillMode";
+            this.toolItemFillMode.Size = new System.Drawing.Size(42, 32);
+            this.toolItemFillMode.Text = "Fill mode";
             // 
             // statusStrip1
             // 
@@ -329,23 +382,130 @@ namespace _14520404_Paint
             this.pnBackGround.Size = new System.Drawing.Size(853, 513);
             this.pnBackGround.TabIndex = 4;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolMenuItemUndo,
+            this.toolMenuItemRedo,
+            this.toolStripSeparator26,
+            this.toolMenuItemClear});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 88);
+            // 
+            // toolMenuItemUndo
+            // 
+            this.toolMenuItemUndo.Image = ((System.Drawing.Image)(resources.GetObject("toolMenuItemUndo.Image")));
+            this.toolMenuItemUndo.Name = "toolMenuItemUndo";
+            this.toolMenuItemUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.toolMenuItemUndo.Size = new System.Drawing.Size(169, 26);
+            this.toolMenuItemUndo.Text = "Undo";
+            this.toolMenuItemUndo.Click += new System.EventHandler(this.toolMenuItemUndo_Click);
+            // 
+            // toolMenuItemRedo
+            // 
+            this.toolMenuItemRedo.Image = ((System.Drawing.Image)(resources.GetObject("toolMenuItemRedo.Image")));
+            this.toolMenuItemRedo.Name = "toolMenuItemRedo";
+            this.toolMenuItemRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.toolMenuItemRedo.Size = new System.Drawing.Size(169, 26);
+            this.toolMenuItemRedo.Text = "Redo";
+            this.toolMenuItemRedo.Click += new System.EventHandler(this.toolMenuItemRedo_Click);
+            // 
+            // toolStripSeparator26
+            // 
+            this.toolStripSeparator26.Name = "toolStripSeparator26";
+            this.toolStripSeparator26.Size = new System.Drawing.Size(166, 6);
+            // 
+            // toolMenuItemClear
+            // 
+            this.toolMenuItemClear.Image = ((System.Drawing.Image)(resources.GetObject("toolMenuItemClear.Image")));
+            this.toolMenuItemClear.Name = "toolMenuItemClear";
+            this.toolMenuItemClear.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.toolMenuItemClear.Size = new System.Drawing.Size(169, 26);
+            this.toolMenuItemClear.Text = "Clear";
+            this.toolMenuItemClear.Click += new System.EventHandler(this.toolMenuItemClear_Click);
+            // 
+            // sliderAlphaFill
+            // 
+            this.sliderAlphaFill.AutoSize = false;
+            this.sliderAlphaFill.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.sliderAlphaFill.Location = new System.Drawing.Point(307, 0);
+            this.sliderAlphaFill.Maximum = 255;
+            this.sliderAlphaFill.Name = "sliderAlphaFill";
+            this.sliderAlphaFill.Size = new System.Drawing.Size(104, 25);
+            this.sliderAlphaFill.TabIndex = 5;
+            this.sliderAlphaFill.TabStop = false;
+            this.sliderAlphaFill.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.sliderAlphaFill.ValueChanged += new System.EventHandler(this.sliderAlphaFill_ValueChanged);
+            // 
+            // sliderAlphaLine
+            // 
+            this.sliderAlphaLine.AutoSize = false;
+            this.sliderAlphaLine.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.sliderAlphaLine.Location = new System.Drawing.Point(197, 0);
+            this.sliderAlphaLine.Maximum = 255;
+            this.sliderAlphaLine.Name = "sliderAlphaLine";
+            this.sliderAlphaLine.Size = new System.Drawing.Size(104, 25);
+            this.sliderAlphaLine.TabIndex = 6;
+            this.sliderAlphaLine.TabStop = false;
+            this.sliderAlphaLine.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.sliderAlphaLine.Value = 255;
+            this.sliderAlphaLine.ValueChanged += new System.EventHandler(this.sliderAlphaLine_ValueChanged);
+            // 
             // pnDrawing
             // 
             this.pnDrawing.BackColor = System.Drawing.Color.Transparent;
             this.pnDrawing.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnDrawing.BackgroundImage")));
+            this.pnDrawing.ContextMenuStrip = this.contextMenuStrip1;
+            this.pnDrawing.image = ((System.Drawing.Image)(resources.GetObject("pnDrawing.image")));
             this.pnDrawing.Location = new System.Drawing.Point(3, 3);
             this.pnDrawing.Name = "pnDrawing";
             this.pnDrawing.Size = new System.Drawing.Size(713, 100);
             this.pnDrawing.TabIndex = 5;
             // 
+            // itemFillSolid
+            // 
+            this.itemFillSolid.Image = ((System.Drawing.Image)(resources.GetObject("itemFillSolid.Image")));
+            this.itemFillSolid.Name = "itemFillSolid";
+            this.itemFillSolid.Size = new System.Drawing.Size(210, 34);
+            this.itemFillSolid.Text = "fill solid";
+            this.itemFillSolid.Click += new System.EventHandler(this.itemFillSolid_Click);
+            // 
+            // itemFillGradient
+            // 
+            this.itemFillGradient.Image = ((System.Drawing.Image)(resources.GetObject("itemFillGradient.Image")));
+            this.itemFillGradient.Name = "itemFillGradient";
+            this.itemFillGradient.Size = new System.Drawing.Size(210, 34);
+            this.itemFillGradient.Text = "fill linear gradient";
+            this.itemFillGradient.Click += new System.EventHandler(this.itemFillGradient_Click);
+            // 
+            // itemFillHatch
+            // 
+            this.itemFillHatch.Image = ((System.Drawing.Image)(resources.GetObject("itemFillHatch.Image")));
+            this.itemFillHatch.Name = "itemFillHatch";
+            this.itemFillHatch.Size = new System.Drawing.Size(210, 34);
+            this.itemFillHatch.Text = "fill hatch";
+            this.itemFillHatch.Click += new System.EventHandler(this.itemFillHatch_Click);
+            // 
+            // itemFillTexture
+            // 
+            this.itemFillTexture.Image = ((System.Drawing.Image)(resources.GetObject("itemFillTexture.Image")));
+            this.itemFillTexture.Name = "itemFillTexture";
+            this.itemFillTexture.Size = new System.Drawing.Size(210, 34);
+            this.itemFillTexture.Text = "fill texture";
+            this.itemFillTexture.Click += new System.EventHandler(this.itemFillTexture_Click);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(853, 601);
+            this.Controls.Add(this.sliderAlphaFill);
+            this.Controls.Add(this.sliderAlphaLine);
             this.Controls.Add(this.pnBackGround);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
             this.Text = "IT008.H21_14520404_Paint";
@@ -356,6 +516,9 @@ namespace _14520404_Paint
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.pnBackGround.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sliderAlphaFill)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderAlphaLine)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,7 +553,22 @@ namespace _14520404_Paint
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem itemRectangle;
         private ToolStripMenuItem itemEclipse;
-        private ToolStripDropDownButton toolItemFill;
+        private ToolStripSeparator toolStripSeparator7;
+        private TrackBar sliderAlphaFill;
+        private TrackBar sliderAlphaLine;
+        private ToolStripLabel lbColorLine;
+        private ToolStripLabel lbColorFill;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem toolMenuItemUndo;
+        private ToolStripMenuItem toolMenuItemRedo;
+        private ToolStripSeparator toolStripSeparator26;
+        private ToolStripMenuItem toolMenuItemClear;
+        private ToolStripDropDownButton toolItemFillMode;
+        private ToolStripMenuItem itemPolygon;
+        private ToolStripMenuItem itemFillSolid;
+        private ToolStripMenuItem itemFillGradient;
+        private ToolStripMenuItem itemFillHatch;
+        private ToolStripMenuItem itemFillTexture;
     }
     
 

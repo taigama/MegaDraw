@@ -8,6 +8,14 @@ using System.Windows.Forms;
 
 namespace _14520404_Paint
 {
+
+    public enum MOUSE_STATE
+    {
+        Left,
+        Right,
+        Middle
+    }
+
     public class MouseTrippleHandler
     {
         protected PanelDrawing host;
@@ -16,12 +24,15 @@ namespace _14520404_Paint
         private Bitmap drawLayer;
         protected Graphics gDraw;
 
+        protected Vector2 grabPoint;
+
         public MouseTrippleHandler(PanelDrawing _Host)
         {
             host = _Host;
             penCustom = host.penCustom;
 
             drawLayer = null;
+            grabPoint = null;
         }
 
         public virtual void Paint (PaintEventArgs e)
@@ -50,6 +61,16 @@ namespace _14520404_Paint
         // call base.Up at bottom of "The overrided"
         public virtual void Up(MouseEventArgs e)
         {
+            End();
+        }
+
+        public virtual void End()
+        {
+            if(drawLayer == null)
+            {
+                return;
+            }
+
             host.imageCustom.Push();
 
             Graphics gImage = Graphics.FromImage(host.image);
@@ -60,6 +81,8 @@ namespace _14520404_Paint
             drawLayer = null;
 
             gDraw.Dispose();
+
+            host.Invalidate();
         }
     }
 }

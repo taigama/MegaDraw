@@ -6,7 +6,7 @@
       <Value Profile="(Default)">7</Value>
     </Setting>
     <Setting Name="panel_width" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">400</Value>
+      <Value Profile="(Default)">300</Value>
     </Setting>
     <Setting Name="panel_heigh" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">300</Value>

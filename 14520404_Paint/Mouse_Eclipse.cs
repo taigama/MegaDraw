@@ -11,35 +11,69 @@ namespace _14520404_Paint
     class Mouse_Eclipse : MouseTrippleHandler
     {
         private bool isDraw = false;
+        private bool isDrag = false;
 
-
+        private Vector2 pointLast = null;
+        TYPE_CONTROL typeControl;
 
         public Mouse_Eclipse(PanelDrawing _Host) : base(_Host) { }
 
 
-        static Point pointInvalid = new Point(-1, -1);
-        private Point pointLast = pointInvalid;
 
-
+        Vector2[] points;
 
         public override void Down(MouseEventArgs e)
         {
+            if (isDraw)
+            {
+                typeControl = host.controlPoint.OnControl(new Vector2(e.X, e.Y), out grabPoint);
+                if (typeControl == TYPE_CONTROL.None)
+                {
+                    End();
+                }
+                if (typeControl == TYPE_CONTROL.Move)
+                {
+
+                    isDrag = true;
+                    return;
+                }
+
+            }
 
             base.Down(e);
 
             isDraw = true;
-            pointLast = new Point(e.X, e.Y);
+            //pointLast = new Vector2(e.X, e.Y);
+            host.controlPoint.AddPoint(new Vector2(e.X, e.Y));
 
-            penCustom.penMain = new Pen(penCustom.brush);
+            isDrag = true;
+            grabPoint = new Vector2(e.X, e.Y);
+            host.controlPoint.AddPoint(grabPoint);
+
+            penCustom.penMain = new Pen(penCustom.brushFront);
             penCustom.penMain.Width = penCustom.sizeBrush;
+            
+            penCustom.CreateBack(e.X, e.Y, e.X + 15, e.Y + 15);
         }
 
+        Vector2 foo;
         public override void Move(MouseEventArgs e)
         {
-            if (isDraw)
+            typeControl = host.controlPoint.OnControl(new Vector2(e.X, e.Y), out foo);
+
+            if (isDrag)
             {
-                gDraw.Clear(Color.Transparent);                
-                gDraw.DrawEllipse(penCustom.penMain, host.RectValid(pointLast.X, pointLast.Y, e.X, e.Y));
+                gDraw.Clear(Color.Transparent);
+                points = host.controlPoint.GetVectors();
+
+                grabPoint.X = e.X;
+                grabPoint.Y = e.Y;
+
+                penCustom.NotifyMovePoint();
+
+                gDraw.FillEllipse(penCustom.brushBack, host.RectValid(points[0].X, points[0].Y, points[1].X, points[1].Y));
+                gDraw.DrawEllipse(penCustom.penMain, host.RectValid(points[0].X, points[0].Y, points[1].X, points[1].Y));
+
                 host.Invalidate();
             }
 
@@ -48,18 +82,38 @@ namespace _14520404_Paint
 
         public override void Up(MouseEventArgs e)
         {
-            if (isDraw)
+            if (isDrag)
             {
-                isDraw = false;
-                pointLast = pointInvalid;
+                points = host.controlPoint.GetVectors();
+                if (points.Length != 2)
+                {
+                    End();
+                    return;
+                }
 
-                penCustom.penMain.Dispose();
-                isDraw = false;
+                if (points[0].Equal(points[1]))
+                {
+                    End();
+                    return;
+                }
 
-                base.Up(e);
+                grabPoint = null;
+                isDrag = false;
             }
+        }
 
-            
+        public override void End()
+        {
+            isDraw = false;
+            isDrag = false;
+
+            pointLast = null;
+            grabPoint = null;
+
+            host.controlPoint.Clear();
+            penCustom.ClearBack();
+
+            base.End();
         }
     }
 }

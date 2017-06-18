@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+using System.Drawing.Drawing2D;
 
 namespace _14520404_Paint
 {
@@ -33,7 +34,8 @@ namespace _14520404_Paint
         private void LoadSetting()
         {
             toolItemCbSize.SelectedIndex = 10;
-            
+
+            pnDrawing.penCustom.texture = (Bitmap)pnDrawing.BackgroundImage;
         }
 
         private void toolItemBtnNew_Click(object sender, EventArgs e)
@@ -61,51 +63,7 @@ namespace _14520404_Paint
 
         #endregion
 
-        private void toolItemColor_Click(object sender, EventArgs e)
-        {
-            bool isFill = (sender == toolItemColorFill);
-            // mở dialog chọn màu ---
-
-            //  khởi tạo
-            ColorDialog colorDialog = new ColorDialog();
-            //  lấy màu hiện tại làm màu đang được chọn trong dialog
-            //colorDialog.Color = ucDrawing.pnPaint.brushMain.Color;
-
-            //colorDialog.Color = pnDrawing.penCustom.brushSolid.Color;
-
-            if (!isFill)
-            {
-                colorDialog.Color = pnDrawing.penCustom.colorFront;
-
-                // mở dialog
-                colorDialog.ShowDialog();
-
-                // sau khi đóng dialog, màu của brush sẽ thành màu được chọn
-                this.pnDrawing.penCustom.colorFront = colorDialog.Color;
-            }
-            else
-            {
-                colorDialog.Color = pnDrawing.penCustom.colorBack;
-                
-                colorDialog.ShowDialog();
-                this.pnDrawing.penCustom.colorBack = colorDialog.Color;
-            }
-
-            // vẽ hình vào button chọn màu ---
-
-            // tại bitmap
-            Bitmap imgBtn = new Bitmap(32, 32);
-
-            // load hình ảnh từ bitmap
-            Graphics flagGraphics = Graphics.FromImage(imgBtn);          
-
-            // vẽ vào bitmap
-            flagGraphics.FillRectangle(Brushes.Black, 0, 0, 32, 32);
-            flagGraphics.FillRectangle(new SolidBrush(colorDialog.Color), 2, 2, 28, 28);
-
-            // đổi hình của cái button
-            ((ToolStripButton)sender).Image = imgBtn;
-        }
+        
 
         private void toolItemBtnSave_Click(object sender, EventArgs e)
         {
@@ -114,6 +72,8 @@ namespace _14520404_Paint
 
         private bool SaveImage()
         {
+            pnDrawing.m_MouseHandler.End();
+
             try
             {
                 SaveFileDialog saveDialog = new SaveFileDialog();
@@ -140,6 +100,8 @@ namespace _14520404_Paint
 
         private bool OpenImage()
         {
+            pnDrawing.m_MouseHandler.End();
+
             try
             {
                 OpenFileDialog openDialog = new OpenFileDialog();
@@ -177,7 +139,7 @@ namespace _14520404_Paint
 
         //bool dropDownHandler = true;
 
-        private void ChangeIconSplitButton(ToolStripMenuItem source, ToolStripDropDownItem target)
+        private void ChangeIconToolStripMenu(ToolStripMenuItem source, ToolStripDropDownItem target)
         {
             target.Image = source.Image;
         }
@@ -192,14 +154,14 @@ namespace _14520404_Paint
         {
             pnDrawing.SetSharp(DRAW_TYPE.dotSquare);
 
-            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+            ChangeIconToolStripMenu((ToolStripMenuItem)sender, toolItemDrawType);
         }
 
         private void itemDotCircle_Click(object sender, EventArgs e)
         {
             pnDrawing.SetSharp(DRAW_TYPE.dotCircle);
 
-            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+            ChangeIconToolStripMenu((ToolStripMenuItem)sender, toolItemDrawType);
         }
 
 
@@ -207,32 +169,58 @@ namespace _14520404_Paint
         {
             pnDrawing.SetSharp(DRAW_TYPE.line);
 
-            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+            ChangeIconToolStripMenu((ToolStripMenuItem)sender, toolItemDrawType);
         }
 
         private void itemRectangle_Click(object sender, EventArgs e)
         {
             pnDrawing.SetSharp(DRAW_TYPE.rectangle);
 
-            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+            ChangeIconToolStripMenu((ToolStripMenuItem)sender, toolItemDrawType);
         }
 
         private void itemEclipse_Click(object sender, EventArgs e)
         {
             pnDrawing.SetSharp(DRAW_TYPE.eclipse);
 
-            ChangeIconSplitButton((ToolStripMenuItem)sender, toolItemDrawType);
+            ChangeIconToolStripMenu((ToolStripMenuItem)sender, toolItemDrawType);
         }
+
+        private void itemPolygon_Click(object sender, EventArgs e)
+        {
+            pnDrawing.SetSharp(DRAW_TYPE.polygon);
+
+            ChangeIconToolStripMenu((ToolStripMenuItem)sender, toolItemDrawType);
+        }
+
         #endregion
 
         private void toolItemSetting_Click(object sender, EventArgs e)
         {
             Setting setting = new Setting();
 
+            // gán sẵn 1 số thứ -----
+            setting.txtSetWidth.Text = pnDrawing.image.Width.ToString();
+            setting.txtSetHeigh.Text = pnDrawing.image.Height.ToString();
+
+            setting.btnTexture.BackgroundImage = pnDrawing.penCustom.texture;
+
+            setting.cbHatchStyle.DataSource = Enum.GetValues(typeof(HatchStyle));
+            setting.cbHatchStyle.Text = pnDrawing.penCustom.styleHatch.ToString();
+
+            // ---------
+
             if (setting.ShowDialog() == DialogResult.OK)
             {
+                // chỉnh lại size
                 pnDrawing.imageCustom.Resize(Properties.Settings.Default.panel_width, Properties.Settings.Default.panel_heigh);
                 pnDrawing.Size = pnDrawing.image.Size;
+
+                // chỉnh lại texture
+                pnDrawing.penCustom.texture = (Bitmap)setting.btnTexture.BackgroundImage;
+
+                // chỉnh lại hatch style
+                Enum.TryParse(setting.cbHatchStyle.SelectedValue.ToString(), out pnDrawing.penCustom.styleHatch);
 
                 pnDrawing.Invalidate();
             }
@@ -263,8 +251,176 @@ namespace _14520404_Paint
                         pnDrawing.Invalidate();
                         return returner;
                     }
+                case (Keys.Control | Keys.C):
+                    return CopyImg();
+                case (Keys.Control | Keys.V):
+                    return PasteImg();
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void toolItemColor_Click(object sender, EventArgs e)
+        {
+            bool isFill = (sender == toolItemColorFill);
+            // mở dialog chọn màu ---
+
+            //  khởi tạo
+            ColorDialog colorDialog = new ColorDialog();
+            //  lấy màu hiện tại làm màu đang được chọn trong dialog
+            //colorDialog.Color = ucDrawing.pnPaint.brushMain.Color;
+
+            //colorDialog.Color = pnDrawing.penCustom.brushSolid.Color;
+
+            if (!isFill)
+            {
+                colorDialog.Color = pnDrawing.penCustom.colorFront;
+
+                // mở dialog
+                colorDialog.ShowDialog();
+                Color lineColor = Color.FromArgb(sliderAlphaLine.Value, colorDialog.Color);
+
+                // sau khi đóng dialog, màu của brush sẽ thành màu được chọn
+                this.pnDrawing.penCustom.colorFront = lineColor;
+            }
+            else
+            {
+                colorDialog.Color = pnDrawing.penCustom.colorBack;
+
+                colorDialog.ShowDialog();
+                Color fillColor = Color.FromArgb(sliderAlphaFill.Value, colorDialog.Color);
+
+
+                this.pnDrawing.penCustom.colorBack = fillColor;
+            }
+
+            // vẽ hình vào button chọn màu ---
+
+            // tại bitmap
+            Bitmap imgBtn = new Bitmap(32, 32);
+
+            // load hình ảnh từ bitmap
+            Graphics flagGraphics = Graphics.FromImage(imgBtn);
+
+            // vẽ vào bitmap
+            flagGraphics.FillRectangle(Brushes.Black, 0, 0, 32, 32);
+            flagGraphics.FillRectangle(new SolidBrush(colorDialog.Color), 2, 2, 28, 28);
+
+            // đổi hình của cái button
+            ((ToolStripItem)sender).Image = imgBtn;
+        }
+
+        private void sliderAlphaLine_ValueChanged(object sender, EventArgs e)
+        {
+            this.pnDrawing.penCustom.colorFront = Color.FromArgb(sliderAlphaLine.Value, pnDrawing.penCustom.colorFront);
+        }
+
+        private void sliderAlphaFill_ValueChanged(object sender, EventArgs e)
+        {
+            this.pnDrawing.penCustom.colorBack = Color.FromArgb(sliderAlphaFill.Value, pnDrawing.penCustom.colorBack);
+        }
+
+        private void toolMenuItemUndo_Click(object sender, EventArgs e)
+        {
+            pnDrawing.imageCustom.Undo();
+            pnDrawing.Invalidate();
+        }
+
+        private void toolMenuItemRedo_Click(object sender, EventArgs e)
+        {
+            pnDrawing.imageCustom.Redo();
+            pnDrawing.Invalidate();
+        }
+
+        private void toolMenuItemClear_Click(object sender, EventArgs e)
+        {
+            pnDrawing.m_MouseHandler.End();
+
+            pnDrawing.Init(this);
+            pnDrawing.Invalidate();
+        }
+
+        private bool CopyImg()
+        {
+            try
+            {
+                Bitmap bmp = new Bitmap(pnDrawing.Width, pnDrawing.Height);
+                Graphics g = Graphics.FromImage(bmp);
+                g.Clear(Color.White);
+                g.DrawImage(pnDrawing.image, Point.Empty);
+
+                Clipboard.SetImage(bmp);
+
+                bmp.Dispose();
+                g.Dispose();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+
+
+            //MemoryStream stream = new MemoryStream();
+            //pnDrawing.image.Save(stream, ImageFormat.Png);
+            //DataObject data = new DataObject("PNG", stream);
+            //Clipboard.SetDataObject(data, true);
+
+            //return true;
+
+
+        }
+
+        private bool PasteImg()
+        {
+            if (Clipboard.ContainsImage())
+            {
+                Bitmap bitmap = (Bitmap)Clipboard.GetImage();
+                //bitmap.MakeTransparent();
+
+                pnDrawing.image = bitmap;
+                pnDrawing.Invalidate();
+                return true;
+            }
+            return false;
+            
+
+
+            //MemoryStream stream = new MemoryStream();
+
+            //IDataObject data = new DataObject("PNG", stream);
+
+            //if(Clipboard.ContainsImage())
+            //    data = Clipboard.GetDataObject();
+
+            //pnDrawing.image = Image.FromStream(stream);
+            //pnDrawing.Invalidate();
+
+            //return true;
+        }
+
+        private void itemFillSolid_Click(object sender, EventArgs e)
+        {
+            pnDrawing.penCustom.ChooseBrush(BRUSH_TYPE.solid);
+            toolItemFillMode.Image = ((ToolStripItem)sender).Image;
+        }
+
+        private void itemFillGradient_Click(object sender, EventArgs e)
+        {
+            pnDrawing.penCustom.ChooseBrush(BRUSH_TYPE.linearGradient);
+            toolItemFillMode.Image = ((ToolStripItem)sender).Image;
+        }
+
+        private void itemFillHatch_Click(object sender, EventArgs e)
+        {
+            pnDrawing.penCustom.ChooseBrush(BRUSH_TYPE.hatch);
+            toolItemFillMode.Image = ((ToolStripItem)sender).Image;
+        }
+
+        private void itemFillTexture_Click(object sender, EventArgs e)
+        {
+            pnDrawing.penCustom.ChooseBrush(BRUSH_TYPE.texture);
+            toolItemFillMode.Image = ((ToolStripItem)sender).Image;
         }
     }
 }

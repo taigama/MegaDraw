@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -10,6 +11,8 @@ namespace _14520404_Paint
         private Main host;
 
         public MyImage imageCustom;
+        public MyPen penCustom;
+        public ControlPoint controlPoint;
 
         public Image image
         {
@@ -17,23 +20,31 @@ namespace _14520404_Paint
             {
                 return imageCustom.image;
             }
+            set
+            {
+                imageCustom.image = value;
+            }
         }
 
         //BufferedGraphicsContext currentContext;
         //BufferedGraphics myBuffer;
-        
-        
+
+
 
         //--------- 
-        private MouseTrippleHandler m_MouseHandler;
+        MOUSE_STATE state_mouse;
+
+        public MouseTrippleHandler m_MouseHandler;
 
         private Mouse_Dot m_MouseDot;
         private Mouse_Line m_MouseLine;
         private Mouse_Rectangle m_MouseRect;
         private Mouse_Eclipse m_MouseEclipse;
+        private Mouse_Polygon m_MousePolygon;
 
 
-        public MyPen penCustom;
+
+
 
 
         public PanelDrawing()
@@ -54,10 +65,16 @@ namespace _14520404_Paint
             penCustom = new MyPen(this);
             penCustom.sizeBrush = Properties.Settings.Default.pen_witdh;
 
+
+            controlPoint = new ControlPoint(7);
+
+
+
             m_MouseDot = new Mouse_Dot(this);
             m_MouseLine = new Mouse_Line(this);
             m_MouseRect = new Mouse_Rectangle(this);
             m_MouseEclipse = new Mouse_Eclipse(this);
+            m_MousePolygon = new Mouse_Polygon(this);
 
 
             m_MouseHandler = m_MouseDot;
@@ -91,29 +108,39 @@ namespace _14520404_Paint
             switch (type)
             {
                 case DRAW_TYPE.dotSquare:
+                    m_MouseHandler.End();
                     m_MouseHandler = m_MouseDot;
                     m_MouseDot.isSquare = true;
                     break;
 
                 case DRAW_TYPE.dotCircle:
+                    m_MouseHandler.End();
                     m_MouseHandler = m_MouseDot;
                     m_MouseDot.isSquare = false;
                     break;
 
                 case DRAW_TYPE.line:
+                    m_MouseHandler.End();
                     m_MouseHandler = m_MouseLine;
                     break;
                 case DRAW_TYPE.rectangle:
+                    m_MouseHandler.End();
                     m_MouseHandler = m_MouseRect;
                     break;
 
                 case DRAW_TYPE.eclipse:
+                    m_MouseHandler.End();
                     m_MouseHandler = m_MouseEclipse;
+                    break;
+                case DRAW_TYPE.polygon:
+                    m_MouseHandler.End();
+                    m_MouseHandler = m_MousePolygon;
                     break;
 
                 default:
                     break;
             }
+            Invalidate();
         }
 
         public void SetLine(BRUSH_TYPE type)
@@ -153,7 +180,7 @@ namespace _14520404_Paint
             }
 
             return temp;
-        }
+        }        
 
 
         protected override void OnPaint(PaintEventArgs e)
@@ -162,12 +189,32 @@ namespace _14520404_Paint
 
             m_MouseHandler.Paint(e);
 
+            controlPoint.DrawControl(e);
+
             base.OnPaint(e);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             //imageCustom.Push();
+            switch(e.Button)
+            {
+                case MouseButtons.Left:
+                    state_mouse = MOUSE_STATE.Left;
+                    break;
+                case MouseButtons.Middle:
+                    state_mouse = MOUSE_STATE.Middle;
+                    break;
+                case MouseButtons.Right:
+                    state_mouse = MOUSE_STATE.Right;
+                    break;
+            }
+
+            switch (state_mouse)
+            {
+                case MOUSE_STATE.Right:
+                    return;
+            }
 
             m_MouseHandler.Down(e);
 
@@ -177,6 +224,12 @@ namespace _14520404_Paint
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
+            switch (state_mouse)
+            {
+                case MOUSE_STATE.Right:
+                    return;
+            }
+
             m_MouseHandler.Move(e);
 
             host.ShowMousePost(e.X, e.Y);
@@ -186,6 +239,12 @@ namespace _14520404_Paint
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
+            switch (state_mouse)
+            {
+                case MOUSE_STATE.Right:
+                    return;
+            }
+
             m_MouseHandler.Up(e);
             
 

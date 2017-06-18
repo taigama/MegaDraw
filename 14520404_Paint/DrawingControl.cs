@@ -65,7 +65,7 @@ namespace _14520404_Paint
         //}
 
         private bool bIsResizing;
-        private Point oldPoint;
+        private Vector2 oldPoint;
         private Size oldSize;
 
         //protected override void OnResize(EventArgs e)

@@ -17,8 +17,8 @@ namespace _14520404_Paint
         public Mouse_Dot(PanelDrawing _Host) : base(_Host) { }
 
 
-        static Point pointInvalid = new Point(-1, -1);
-        private Point pointLast = pointInvalid;
+        static Vector2 pointInvalid = new Vector2(-1, -1);
+        private Vector2 pointLast = pointInvalid;
 
         public override void Down(MouseEventArgs e)
         {
@@ -26,20 +26,20 @@ namespace _14520404_Paint
 
             isDraw = true;
             
-            pointLast = new Point(e.X, e.Y);
+            pointLast = new Vector2(e.X, e.Y);
 
             // chấm 1 cái
 
             if (isSquare)
             {                
-                gDraw.FillRectangle(penCustom.brush, e.X - (penCustom.sizeBrush / 2), e.Y - (penCustom.sizeBrush / 2), penCustom.sizeBrush, penCustom.sizeBrush);
+                gDraw.FillRectangle(penCustom.brushFront, e.X - (penCustom.sizeBrush / 2), e.Y - (penCustom.sizeBrush / 2), penCustom.sizeBrush, penCustom.sizeBrush);
             }
             else
             {             
-                gDraw.FillEllipse(penCustom.brush, e.X - (penCustom.sizeBrush / 2), e.Y - (penCustom.sizeBrush / 2), penCustom.sizeBrush, penCustom.sizeBrush);
+                gDraw.FillEllipse(penCustom.brushFront, e.X - (penCustom.sizeBrush / 2), e.Y - (penCustom.sizeBrush / 2), penCustom.sizeBrush, penCustom.sizeBrush);
             }
 
-            penCustom.penMain = new Pen(penCustom.brush);
+            penCustom.penMain = new Pen(penCustom.brushFront);
             penCustom.penMain.Width = penCustom.sizeBrush;
         }
 
@@ -49,17 +49,17 @@ namespace _14520404_Paint
             {
                 if (isSquare)
                 {
-                    gDraw.FillRectangle(penCustom.brush, e.X - (penCustom.sizeBrush / 2), e.Y - (penCustom.sizeBrush / 2), penCustom.sizeBrush, penCustom.sizeBrush);
+                    gDraw.FillRectangle(penCustom.brushFront, e.X - (penCustom.sizeBrush / 2), e.Y - (penCustom.sizeBrush / 2), penCustom.sizeBrush, penCustom.sizeBrush);
                 }
                 else
                 {
-                    gDraw.FillEllipse(penCustom.brush, e.X - (penCustom.sizeBrush / 2), e.Y - (penCustom.sizeBrush / 2), penCustom.sizeBrush, penCustom.sizeBrush);
+                    gDraw.FillEllipse(penCustom.brushFront, e.X - (penCustom.sizeBrush / 2), e.Y - (penCustom.sizeBrush / 2), penCustom.sizeBrush, penCustom.sizeBrush);
                 }
 
                 // vẽ cái đường này giúp tạo thành 1 nét thẳng
                 gDraw.DrawLine(penCustom.penMain, pointLast.X, pointLast.Y, e.X, e.Y);
 
-                pointLast = new Point(e.X, e.Y);
+                pointLast = new Vector2(e.X, e.Y);
             }
             host.Invalidate();
 

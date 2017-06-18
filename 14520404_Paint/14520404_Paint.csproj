@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlPoint.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,9 +105,17 @@
     <Compile Include="Mouse_Dot.cs" />
     <Compile Include="Mouse_Eclipse.cs" />
     <Compile Include="Mouse_Line.cs" />
+    <Compile Include="Mouse_Polygon.cs" />
     <Compile Include="Mouse_Rectangle.cs" />
     <Compile Include="MyImage.cs" />
     <Compile Include="MyPen.cs" />
+    <Compile Include="ToolBoxOK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolBoxOK.Designer.cs">
+      <DependentUpon>ToolBoxOK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vector2.cs" />
     <Compile Include="PanelK.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -145,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Setting.resx">
       <DependentUpon>Setting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBoxOK.resx">
+      <DependentUpon>ToolBoxOK.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="14520404_Paint_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
