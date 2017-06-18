@@ -399,6 +399,7 @@ namespace _14520404_Paint
             //return true;
         }
 
+        #region Fill item
         private void itemFillSolid_Click(object sender, EventArgs e)
         {
             pnDrawing.penCustom.ChooseBrush(BRUSH_TYPE.solid);
@@ -421,6 +422,12 @@ namespace _14520404_Paint
         {
             pnDrawing.penCustom.ChooseBrush(BRUSH_TYPE.texture);
             toolItemFillMode.Image = ((ToolStripItem)sender).Image;
+        }
+        #endregion
+
+        private void itemRegion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

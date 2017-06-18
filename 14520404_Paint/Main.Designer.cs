@@ -38,7 +38,6 @@ namespace _14520404_Paint
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolItemSetting = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolItemBtnOpen = new System.Windows.Forms.ToolStripButton();
             this.toolItemBtnNew = new System.Windows.Forms.ToolStripButton();
@@ -73,11 +72,14 @@ namespace _14520404_Paint
             this.toolMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
             this.sliderAlphaFill = new System.Windows.Forms.TrackBar();
             this.sliderAlphaLine = new System.Windows.Forms.TrackBar();
-            this.pnDrawing = new _14520404_Paint.PanelDrawing();
             this.itemFillSolid = new System.Windows.Forms.ToolStripMenuItem();
             this.itemFillGradient = new System.Windows.Forms.ToolStripMenuItem();
             this.itemFillHatch = new System.Windows.Forms.ToolStripMenuItem();
             this.itemFillTexture = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.itemRegion = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnDrawing = new _14520404_Paint.PanelDrawing();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -91,8 +93,7 @@ namespace _14520404_Paint
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemFile,
-            this.menuItemAbout});
+            this.menuItemFile});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(853, 28);
@@ -114,12 +115,6 @@ namespace _14520404_Paint
             this.toolItemSetting.Size = new System.Drawing.Size(131, 26);
             this.toolItemSetting.Text = "Setting";
             this.toolItemSetting.Click += new System.EventHandler(this.toolItemSetting_Click);
-            // 
-            // menuItemAbout
-            // 
-            this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(62, 24);
-            this.menuItemAbout.Text = "About";
             // 
             // toolStrip1
             // 
@@ -218,7 +213,9 @@ namespace _14520404_Paint
             this.itemRectangle,
             this.itemEclipse,
             this.toolStripSeparator7,
-            this.itemPolygon});
+            this.itemPolygon,
+            this.toolStripSeparator8,
+            this.itemRegion});
             this.toolItemDrawType.Image = ((System.Drawing.Image)(resources.GetObject("toolItemDrawType.Image")));
             this.toolItemDrawType.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolItemDrawType.Name = "toolItemDrawType";
@@ -452,6 +449,60 @@ namespace _14520404_Paint
             this.sliderAlphaLine.Value = 255;
             this.sliderAlphaLine.ValueChanged += new System.EventHandler(this.sliderAlphaLine_ValueChanged);
             // 
+            // itemFillSolid
+            // 
+            this.itemFillSolid.Image = ((System.Drawing.Image)(resources.GetObject("itemFillSolid.Image")));
+            this.itemFillSolid.Name = "itemFillSolid";
+            this.itemFillSolid.Size = new System.Drawing.Size(202, 26);
+            this.itemFillSolid.Text = "fill solid";
+            this.itemFillSolid.Click += new System.EventHandler(this.itemFillSolid_Click);
+            // 
+            // itemFillGradient
+            // 
+            this.itemFillGradient.Image = ((System.Drawing.Image)(resources.GetObject("itemFillGradient.Image")));
+            this.itemFillGradient.Name = "itemFillGradient";
+            this.itemFillGradient.Size = new System.Drawing.Size(202, 26);
+            this.itemFillGradient.Text = "fill linear gradient";
+            this.itemFillGradient.Click += new System.EventHandler(this.itemFillGradient_Click);
+            // 
+            // itemFillHatch
+            // 
+            this.itemFillHatch.Image = ((System.Drawing.Image)(resources.GetObject("itemFillHatch.Image")));
+            this.itemFillHatch.Name = "itemFillHatch";
+            this.itemFillHatch.Size = new System.Drawing.Size(202, 26);
+            this.itemFillHatch.Text = "fill hatch";
+            this.itemFillHatch.Click += new System.EventHandler(this.itemFillHatch_Click);
+            // 
+            // itemFillTexture
+            // 
+            this.itemFillTexture.Image = ((System.Drawing.Image)(resources.GetObject("itemFillTexture.Image")));
+            this.itemFillTexture.Name = "itemFillTexture";
+            this.itemFillTexture.Size = new System.Drawing.Size(202, 26);
+            this.itemFillTexture.Text = "fill texture";
+            this.itemFillTexture.Click += new System.EventHandler(this.itemFillTexture_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(186, 6);
+            // 
+            // itemRegion
+            // 
+            this.itemRegion.Image = ((System.Drawing.Image)(resources.GetObject("itemRegion.Image")));
+            this.itemRegion.Name = "itemRegion";
+            this.itemRegion.Size = new System.Drawing.Size(189, 34);
+            this.itemRegion.Text = "Region tool";
+            this.itemRegion.Click += new System.EventHandler(this.itemRegion_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(101, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 17);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Transparent:";
+            // 
             // pnDrawing
             // 
             this.pnDrawing.BackColor = System.Drawing.Color.Transparent;
@@ -463,42 +514,11 @@ namespace _14520404_Paint
             this.pnDrawing.Size = new System.Drawing.Size(713, 100);
             this.pnDrawing.TabIndex = 5;
             // 
-            // itemFillSolid
-            // 
-            this.itemFillSolid.Image = ((System.Drawing.Image)(resources.GetObject("itemFillSolid.Image")));
-            this.itemFillSolid.Name = "itemFillSolid";
-            this.itemFillSolid.Size = new System.Drawing.Size(210, 34);
-            this.itemFillSolid.Text = "fill solid";
-            this.itemFillSolid.Click += new System.EventHandler(this.itemFillSolid_Click);
-            // 
-            // itemFillGradient
-            // 
-            this.itemFillGradient.Image = ((System.Drawing.Image)(resources.GetObject("itemFillGradient.Image")));
-            this.itemFillGradient.Name = "itemFillGradient";
-            this.itemFillGradient.Size = new System.Drawing.Size(210, 34);
-            this.itemFillGradient.Text = "fill linear gradient";
-            this.itemFillGradient.Click += new System.EventHandler(this.itemFillGradient_Click);
-            // 
-            // itemFillHatch
-            // 
-            this.itemFillHatch.Image = ((System.Drawing.Image)(resources.GetObject("itemFillHatch.Image")));
-            this.itemFillHatch.Name = "itemFillHatch";
-            this.itemFillHatch.Size = new System.Drawing.Size(210, 34);
-            this.itemFillHatch.Text = "fill hatch";
-            this.itemFillHatch.Click += new System.EventHandler(this.itemFillHatch_Click);
-            // 
-            // itemFillTexture
-            // 
-            this.itemFillTexture.Image = ((System.Drawing.Image)(resources.GetObject("itemFillTexture.Image")));
-            this.itemFillTexture.Name = "itemFillTexture";
-            this.itemFillTexture.Size = new System.Drawing.Size(210, 34);
-            this.itemFillTexture.Text = "fill texture";
-            this.itemFillTexture.Click += new System.EventHandler(this.itemFillTexture_Click);
-            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(853, 601);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.sliderAlphaFill);
             this.Controls.Add(this.sliderAlphaLine);
             this.Controls.Add(this.pnBackGround);
@@ -528,7 +548,6 @@ namespace _14520404_Paint
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuItemFile;
-        private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolItemBtnNew;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -569,6 +588,9 @@ namespace _14520404_Paint
         private ToolStripMenuItem itemFillGradient;
         private ToolStripMenuItem itemFillHatch;
         private ToolStripMenuItem itemFillTexture;
+        private ToolStripSeparator toolStripSeparator8;
+        private ToolStripMenuItem itemRegion;
+        private Label label1;
     }
     
 

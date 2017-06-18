@@ -54,10 +54,12 @@ namespace _14520404_Paint
                     Point[] points = pointController.GetPoints();
                     path.AddLines(points);
 
-                    using (Brush brushBack = new SolidBrush(penCustom.colorBack))
-                    {
-                        gDraw.FillPolygon(brushBack, pointController.GetPoints());
-                    }
+                    //using (Brush brushBack = new SolidBrush(penCustom.colorBack))
+                    //{
+                    //    gDraw.FillPolygon(brushBack, pointController.GetPoints());
+                    //}
+                    gDraw.FillPolygon(penCustom.brushBack, points);
+
                     gDraw.DrawPath(penCustom.penMain, path);
 
                     isDrag = true;
@@ -99,6 +101,8 @@ namespace _14520404_Paint
             toolBox.btnOK.Click += BtnOK_Click;
             toolBox.btnCancel.Click += BtnCancel_Click;
             toolBox.Show();
+
+            penCustom.CreateBack(_X, _Y, _X + 15, _Y + 15);
         }
         
         private void BtnOK_Click(object sender, EventArgs e)
@@ -124,6 +128,7 @@ namespace _14520404_Paint
                 grabPoint.X = e.X;
                 grabPoint.Y = e.Y;
 
+                penCustom.NotifyMovePoint();
                 
                 path.Reset();
                 path.FillMode = FillMode.Winding;
@@ -135,10 +140,12 @@ namespace _14520404_Paint
 
                 //}
 
-                using (Brush brushBack = new SolidBrush(penCustom.colorBack))
-                {
-                    gDraw.FillPolygon(brushBack, pointController.GetPoints());
-                }
+                //using (Brush brushBack = new SolidBrush(penCustom.colorBack))
+                //{
+                //    gDraw.FillPolygon(brushBack, pointController.GetPoints());
+                //}
+                gDraw.FillPolygon(penCustom.brushBack, points);
+
                 gDraw.DrawPath(penCustom.penMain,path);
 
                 host.Invalidate();
@@ -167,6 +174,7 @@ namespace _14520404_Paint
             grabPoint = null;
 
             pointController.Clear();
+            penCustom.ClearBack();
 
             if (path != null)
             {
