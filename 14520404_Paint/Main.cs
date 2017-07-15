@@ -16,12 +16,6 @@ namespace _14520404_Paint
 {
     public partial class Main : Form
     {
-        
-
-        //static SolidBrush brush = new SolidBrush(Color.Black);
-
-        //static int sizeBrush = 1;
-
         public Main()
         {
             InitializeComponent();
@@ -61,13 +55,67 @@ namespace _14520404_Paint
             statusItemMousePost.Text = MousePost(X, Y);
         }
 
+        #region copy, paste
+        private bool CopyImg()
+        {
+            // nếu có region thì copy từ region
+            if (pnDrawing.controlPoint.HaveRegion())
+            {
+                return pnDrawing.m_MouseRegion.Copy();
+            }
+            // không thì copy toàn bộ
+
+            try
+            {
+                Bitmap bmp = new Bitmap(pnDrawing.Width, pnDrawing.Height);
+                Graphics g = Graphics.FromImage(bmp);
+                g.Clear(Color.White);
+                g.DrawImage(pnDrawing.image, Point.Empty);
+
+                Clipboard.SetImage(bmp);
+
+                bmp.Dispose();
+                g.Dispose();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool PasteImg()
+        {
+            pnDrawing.SetSharp(DRAW_TYPE.region);
+            return pnDrawing.m_MouseRegion.Paste();
+        }
         #endregion
 
-        
+        #region Open, Save
 
-        private void toolItemBtnSave_Click(object sender, EventArgs e)
+        private bool OpenImage()
         {
-            SaveImage();
+            pnDrawing.m_MouseHandler.End();
+
+            try
+            {
+                OpenFileDialog openDialog = new OpenFileDialog();
+                openDialog.Filter = "image file|*.bmp;*.jpg;*.jpeg;*.png";
+
+                if (openDialog.ShowDialog() == DialogResult.OK)
+                {
+                    pnDrawing.imageCustom.GetImage(new Bitmap(openDialog.FileName), pnDrawing);
+
+                    pnDrawing.Size = pnDrawing.image.Size;
+                    pnDrawing.Invalidate();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         private bool SaveImage()
@@ -92,35 +140,7 @@ namespace _14520404_Paint
             }
             return true;
         }
-
-        private void toolItemBtnOpen_Click(object sender, EventArgs e)
-        {
-            OpenImage();
-        }
-
-        private bool OpenImage()
-        {
-            pnDrawing.m_MouseHandler.End();
-
-            try
-            {
-                OpenFileDialog openDialog = new OpenFileDialog();
-                openDialog.Filter = "image file|*.bmp;*.jpg;*.jpeg;*.png";
-
-                if (openDialog.ShowDialog() == DialogResult.OK)
-                {                    
-                    pnDrawing.imageCustom.GetImage(new Bitmap(openDialog.FileName), pnDrawing);                    
-
-                    pnDrawing.Size = pnDrawing.image.Size;
-                    pnDrawing.Invalidate();
-                }
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-            return true;
-        }
+        #endregion
 
         void LoadSizeBrush()
         {
@@ -143,6 +163,26 @@ namespace _14520404_Paint
         {
             target.Image = source.Image;
         }
+
+        #endregion
+
+
+
+        private void toolItemBtnSave_Click(object sender, EventArgs e)
+        {
+            SaveImage();
+        }
+
+        
+
+        private void toolItemBtnOpen_Click(object sender, EventArgs e)
+        {
+            OpenImage();
+        }
+
+        
+
+        
 
         private void toolItemCbSize_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -189,6 +229,13 @@ namespace _14520404_Paint
         private void itemPolygon_Click(object sender, EventArgs e)
         {
             pnDrawing.SetSharp(DRAW_TYPE.polygon);
+
+            ChangeIconToolStripMenu((ToolStripMenuItem)sender, toolItemDrawType);
+        }
+
+        private void itemRegion_Click(object sender, EventArgs e)
+        {
+            pnDrawing.SetSharp(DRAW_TYPE.region);
 
             ChangeIconToolStripMenu((ToolStripMenuItem)sender, toolItemDrawType);
         }
@@ -255,10 +302,15 @@ namespace _14520404_Paint
                     return CopyImg();
                 case (Keys.Control | Keys.V):
                     return PasteImg();
+
+                case (Keys.Delete):
+                    return pnDrawing.m_MouseRegion.Delete();
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+
+        #region color
         private void toolItemColor_Click(object sender, EventArgs e)
         {
             bool isFill = (sender == toolItemColorFill);
@@ -318,7 +370,9 @@ namespace _14520404_Paint
         {
             this.pnDrawing.penCustom.colorBack = Color.FromArgb(sliderAlphaFill.Value, pnDrawing.penCustom.colorBack);
         }
+        #endregion
 
+        #region context menu
         private void toolMenuItemUndo_Click(object sender, EventArgs e)
         {
             pnDrawing.imageCustom.Undo();
@@ -339,65 +393,22 @@ namespace _14520404_Paint
             pnDrawing.Invalidate();
         }
 
-        private bool CopyImg()
+        private void toolMenuItemCopy_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Bitmap bmp = new Bitmap(pnDrawing.Width, pnDrawing.Height);
-                Graphics g = Graphics.FromImage(bmp);
-                g.Clear(Color.White);
-                g.DrawImage(pnDrawing.image, Point.Empty);
-
-                Clipboard.SetImage(bmp);
-
-                bmp.Dispose();
-                g.Dispose();
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-
-            return true;
-
-
-            //MemoryStream stream = new MemoryStream();
-            //pnDrawing.image.Save(stream, ImageFormat.Png);
-            //DataObject data = new DataObject("PNG", stream);
-            //Clipboard.SetDataObject(data, true);
-
-            //return true;
-
-
+            CopyImg();
         }
 
-        private bool PasteImg()
+        private void toolMenuItemPaste_Click(object sender, EventArgs e)
         {
-            if (Clipboard.ContainsImage())
-            {
-                Bitmap bitmap = (Bitmap)Clipboard.GetImage();
-                //bitmap.MakeTransparent();
-
-                pnDrawing.image = bitmap;
-                pnDrawing.Invalidate();
-                return true;
-            }
-            return false;
-            
-
-
-            //MemoryStream stream = new MemoryStream();
-
-            //IDataObject data = new DataObject("PNG", stream);
-
-            //if(Clipboard.ContainsImage())
-            //    data = Clipboard.GetDataObject();
-
-            //pnDrawing.image = Image.FromStream(stream);
-            //pnDrawing.Invalidate();
-
-            //return true;
+            PasteImg();
         }
+
+        private void toolMenuItemDelete_Click(object sender, EventArgs e)
+        {
+            pnDrawing.m_MouseRegion.Delete();
+        }
+        #endregion
+
 
         #region Fill item
         private void itemFillSolid_Click(object sender, EventArgs e)
@@ -423,11 +434,9 @@ namespace _14520404_Paint
             pnDrawing.penCustom.ChooseBrush(BRUSH_TYPE.texture);
             toolItemFillMode.Image = ((ToolStripItem)sender).Image;
         }
+
         #endregion
 
-        private void itemRegion_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

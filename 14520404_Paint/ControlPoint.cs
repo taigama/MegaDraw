@@ -102,6 +102,8 @@ namespace _14520404_Paint
             Rectangle rect = region.Value;
             rect.X += moveX;
             rect.Y += moveY;
+
+            region = rect;
             
         }
 
@@ -137,6 +139,7 @@ namespace _14520404_Paint
             return true;
         }
 
+        #region draw
         public void DrawControl(PaintEventArgs e)
         {
             if(points.Count > 0)
@@ -178,13 +181,14 @@ namespace _14520404_Paint
 
         private void DrawRegion(PaintEventArgs e, Rectangle rect)
         {
-            using (Pen pen = new Pen(Brushes.DarkGray, 1))
+            using (Pen pen = new Pen(Brushes.DarkGray, 3))
             {
                 pen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
 
                 e.Graphics.DrawRectangle(pen, rect);
             }
         }
+        #endregion
 
         public void AddPoint(params Vector2[] _Points)
         {
@@ -199,6 +203,22 @@ namespace _14520404_Paint
             foreach (Vector2 point in _Points)
             {
                 this.subPoints.Add(point);
+            }
+        }
+
+        public void CreateRegion(Rectangle rect)
+        {
+            region = rect;
+        }
+
+        public Rectangle Region
+        {
+            get
+            {
+                if (region != null)
+                    return region.Value;
+
+                return Rectangle.Empty;
             }
         }
 
@@ -238,6 +258,7 @@ namespace _14520404_Paint
             return pps;
         }
 
+        #region clear
         public void Clear()
         {
             points.Clear();
@@ -249,5 +270,12 @@ namespace _14520404_Paint
         {
             subPoints.Clear();
         }
+
+        public void ClearPoint()
+        {
+            points.Clear();
+            subPoints.Clear();
+        }
+        #endregion
     }
 }

@@ -42,6 +42,8 @@ namespace _14520404_Paint
         private Mouse_Eclipse m_MouseEclipse;
         private Mouse_Polygon m_MousePolygon;
 
+        public Mouse_Region m_MouseRegion;
+
 
 
 
@@ -75,6 +77,8 @@ namespace _14520404_Paint
             m_MouseRect = new Mouse_Rectangle(this);
             m_MouseEclipse = new Mouse_Eclipse(this);
             m_MousePolygon = new Mouse_Polygon(this);
+
+            m_MouseRegion = new Mouse_Region(this);
 
 
             m_MouseHandler = m_MouseDot;
@@ -135,6 +139,11 @@ namespace _14520404_Paint
                 case DRAW_TYPE.polygon:
                     m_MouseHandler.End();
                     m_MouseHandler = m_MousePolygon;
+                    break;
+
+                case DRAW_TYPE.region:
+                    m_MouseHandler.End();
+                    m_MouseHandler = m_MouseRegion;
                     break;
 
                 default:

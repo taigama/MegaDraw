@@ -107,6 +107,7 @@
     <Compile Include="Mouse_Line.cs" />
     <Compile Include="Mouse_Polygon.cs" />
     <Compile Include="Mouse_Rectangle.cs" />
+    <Compile Include="Mouse_Region.cs" />
     <Compile Include="MyImage.cs" />
     <Compile Include="MyPen.cs" />
     <Compile Include="ToolBoxOK.cs">

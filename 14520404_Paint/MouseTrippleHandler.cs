@@ -18,10 +18,12 @@ namespace _14520404_Paint
 
     public class MouseTrippleHandler
     {
+        protected Point pointTranslate;
+
         protected PanelDrawing host;
         protected MyPen penCustom;
 
-        private Bitmap drawLayer;
+        protected Bitmap drawLayer;
         protected Graphics gDraw;
 
         protected Vector2 grabPoint;
@@ -33,12 +35,14 @@ namespace _14520404_Paint
 
             drawLayer = null;
             grabPoint = null;
+
+            pointTranslate = Point.Empty;
         }
 
         public virtual void Paint (PaintEventArgs e)
         {
-            if(drawLayer != null)
-                e.Graphics.DrawImage(drawLayer, Point.Empty);
+            if (drawLayer != null)
+                e.Graphics.DrawImage(drawLayer, pointTranslate);
         }
 
         // call base.Down at head of "The overrided"
@@ -74,13 +78,17 @@ namespace _14520404_Paint
             host.imageCustom.Push();
 
             Graphics gImage = Graphics.FromImage(host.image);
-            gImage.DrawImage(drawLayer, Point.Empty);
+            gImage.DrawImage(drawLayer, pointTranslate);
 
             drawLayer.Dispose();
             // Paint() error without this
             drawLayer = null;
 
-            gDraw.Dispose();
+            if (gDraw != null)
+            {
+                gDraw.Dispose();
+                gDraw = null;
+            }
 
             host.Invalidate();
         }

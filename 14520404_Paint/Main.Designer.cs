@@ -54,6 +54,8 @@ namespace _14520404_Paint
             this.itemEclipse = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.itemPolygon = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.itemRegion = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.lbColorLine = new System.Windows.Forms.ToolStripLabel();
             this.toolItemColorLine = new System.Windows.Forms.ToolStripButton();
@@ -62,6 +64,10 @@ namespace _14520404_Paint
             this.toolItemColorFill = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolItemFillMode = new System.Windows.Forms.ToolStripDropDownButton();
+            this.itemFillSolid = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemFillGradient = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemFillHatch = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemFillTexture = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusItemMousePost = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnBackGround = new System.Windows.Forms.Panel();
@@ -72,13 +78,12 @@ namespace _14520404_Paint
             this.toolMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
             this.sliderAlphaFill = new System.Windows.Forms.TrackBar();
             this.sliderAlphaLine = new System.Windows.Forms.TrackBar();
-            this.itemFillSolid = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemFillGradient = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemFillHatch = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemFillTexture = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.itemRegion = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolMenuItemPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.pnDrawing = new _14520404_Paint.PanelDrawing();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -226,7 +231,7 @@ namespace _14520404_Paint
             // 
             this.itemDotSquare.Image = ((System.Drawing.Image)(resources.GetObject("itemDotSquare.Image")));
             this.itemDotSquare.Name = "itemDotSquare";
-            this.itemDotSquare.Size = new System.Drawing.Size(189, 34);
+            this.itemDotSquare.Size = new System.Drawing.Size(162, 26);
             this.itemDotSquare.Text = "Dot Square";
             this.itemDotSquare.Click += new System.EventHandler(this.itemDotSquare_Click);
             // 
@@ -234,33 +239,33 @@ namespace _14520404_Paint
             // 
             this.itemDotCircle.Image = ((System.Drawing.Image)(resources.GetObject("itemDotCircle.Image")));
             this.itemDotCircle.Name = "itemDotCircle";
-            this.itemDotCircle.Size = new System.Drawing.Size(189, 34);
+            this.itemDotCircle.Size = new System.Drawing.Size(162, 26);
             this.itemDotCircle.Text = "Dot";
             this.itemDotCircle.Click += new System.EventHandler(this.itemDotCircle_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(186, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(159, 6);
             // 
             // itemLine
             // 
             this.itemLine.Image = ((System.Drawing.Image)(resources.GetObject("itemLine.Image")));
             this.itemLine.Name = "itemLine";
-            this.itemLine.Size = new System.Drawing.Size(189, 34);
+            this.itemLine.Size = new System.Drawing.Size(162, 26);
             this.itemLine.Text = "Line";
             this.itemLine.Click += new System.EventHandler(this.itemLine_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(186, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(159, 6);
             // 
             // itemRectangle
             // 
             this.itemRectangle.Image = ((System.Drawing.Image)(resources.GetObject("itemRectangle.Image")));
             this.itemRectangle.Name = "itemRectangle";
-            this.itemRectangle.Size = new System.Drawing.Size(189, 34);
+            this.itemRectangle.Size = new System.Drawing.Size(162, 26);
             this.itemRectangle.Text = "Rectangle";
             this.itemRectangle.Click += new System.EventHandler(this.itemRectangle_Click);
             // 
@@ -268,22 +273,35 @@ namespace _14520404_Paint
             // 
             this.itemEclipse.Image = ((System.Drawing.Image)(resources.GetObject("itemEclipse.Image")));
             this.itemEclipse.Name = "itemEclipse";
-            this.itemEclipse.Size = new System.Drawing.Size(189, 34);
+            this.itemEclipse.Size = new System.Drawing.Size(162, 26);
             this.itemEclipse.Text = "Eclipse";
             this.itemEclipse.Click += new System.EventHandler(this.itemEclipse_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(186, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(159, 6);
             // 
             // itemPolygon
             // 
             this.itemPolygon.Image = ((System.Drawing.Image)(resources.GetObject("itemPolygon.Image")));
             this.itemPolygon.Name = "itemPolygon";
-            this.itemPolygon.Size = new System.Drawing.Size(189, 34);
+            this.itemPolygon.Size = new System.Drawing.Size(162, 26);
             this.itemPolygon.Text = "Polygon";
             this.itemPolygon.Click += new System.EventHandler(this.itemPolygon_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(159, 6);
+            // 
+            // itemRegion
+            // 
+            this.itemRegion.Image = ((System.Drawing.Image)(resources.GetObject("itemRegion.Image")));
+            this.itemRegion.Name = "itemRegion";
+            this.itemRegion.Size = new System.Drawing.Size(162, 26);
+            this.itemRegion.Text = "Region tool";
+            this.itemRegion.Click += new System.EventHandler(this.itemRegion_Click);
             // 
             // toolStripSeparator3
             // 
@@ -349,6 +367,38 @@ namespace _14520404_Paint
             this.toolItemFillMode.Size = new System.Drawing.Size(42, 32);
             this.toolItemFillMode.Text = "Fill mode";
             // 
+            // itemFillSolid
+            // 
+            this.itemFillSolid.Image = ((System.Drawing.Image)(resources.GetObject("itemFillSolid.Image")));
+            this.itemFillSolid.Name = "itemFillSolid";
+            this.itemFillSolid.Size = new System.Drawing.Size(202, 26);
+            this.itemFillSolid.Text = "fill solid";
+            this.itemFillSolid.Click += new System.EventHandler(this.itemFillSolid_Click);
+            // 
+            // itemFillGradient
+            // 
+            this.itemFillGradient.Image = ((System.Drawing.Image)(resources.GetObject("itemFillGradient.Image")));
+            this.itemFillGradient.Name = "itemFillGradient";
+            this.itemFillGradient.Size = new System.Drawing.Size(202, 26);
+            this.itemFillGradient.Text = "fill linear gradient";
+            this.itemFillGradient.Click += new System.EventHandler(this.itemFillGradient_Click);
+            // 
+            // itemFillHatch
+            // 
+            this.itemFillHatch.Image = ((System.Drawing.Image)(resources.GetObject("itemFillHatch.Image")));
+            this.itemFillHatch.Name = "itemFillHatch";
+            this.itemFillHatch.Size = new System.Drawing.Size(202, 26);
+            this.itemFillHatch.Text = "fill hatch";
+            this.itemFillHatch.Click += new System.EventHandler(this.itemFillHatch_Click);
+            // 
+            // itemFillTexture
+            // 
+            this.itemFillTexture.Image = ((System.Drawing.Image)(resources.GetObject("itemFillTexture.Image")));
+            this.itemFillTexture.Name = "itemFillTexture";
+            this.itemFillTexture.Size = new System.Drawing.Size(202, 26);
+            this.itemFillTexture.Text = "fill texture";
+            this.itemFillTexture.Click += new System.EventHandler(this.itemFillTexture_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -386,16 +436,21 @@ namespace _14520404_Paint
             this.toolMenuItemUndo,
             this.toolMenuItemRedo,
             this.toolStripSeparator26,
-            this.toolMenuItemClear});
+            this.toolMenuItemClear,
+            this.toolStripSeparator9,
+            this.toolMenuItemCopy,
+            this.toolMenuItemPaste,
+            this.toolStripSeparator10,
+            this.toolMenuItemDelete});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 88);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 206);
             // 
             // toolMenuItemUndo
             // 
             this.toolMenuItemUndo.Image = ((System.Drawing.Image)(resources.GetObject("toolMenuItemUndo.Image")));
             this.toolMenuItemUndo.Name = "toolMenuItemUndo";
             this.toolMenuItemUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.toolMenuItemUndo.Size = new System.Drawing.Size(169, 26);
+            this.toolMenuItemUndo.Size = new System.Drawing.Size(233, 26);
             this.toolMenuItemUndo.Text = "Undo";
             this.toolMenuItemUndo.Click += new System.EventHandler(this.toolMenuItemUndo_Click);
             // 
@@ -404,21 +459,21 @@ namespace _14520404_Paint
             this.toolMenuItemRedo.Image = ((System.Drawing.Image)(resources.GetObject("toolMenuItemRedo.Image")));
             this.toolMenuItemRedo.Name = "toolMenuItemRedo";
             this.toolMenuItemRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.toolMenuItemRedo.Size = new System.Drawing.Size(169, 26);
+            this.toolMenuItemRedo.Size = new System.Drawing.Size(233, 26);
             this.toolMenuItemRedo.Text = "Redo";
             this.toolMenuItemRedo.Click += new System.EventHandler(this.toolMenuItemRedo_Click);
             // 
             // toolStripSeparator26
             // 
             this.toolStripSeparator26.Name = "toolStripSeparator26";
-            this.toolStripSeparator26.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator26.Size = new System.Drawing.Size(230, 6);
             // 
             // toolMenuItemClear
             // 
             this.toolMenuItemClear.Image = ((System.Drawing.Image)(resources.GetObject("toolMenuItemClear.Image")));
             this.toolMenuItemClear.Name = "toolMenuItemClear";
             this.toolMenuItemClear.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.toolMenuItemClear.Size = new System.Drawing.Size(169, 26);
+            this.toolMenuItemClear.Size = new System.Drawing.Size(233, 26);
             this.toolMenuItemClear.Text = "Clear";
             this.toolMenuItemClear.Click += new System.EventHandler(this.toolMenuItemClear_Click);
             // 
@@ -449,51 +504,6 @@ namespace _14520404_Paint
             this.sliderAlphaLine.Value = 255;
             this.sliderAlphaLine.ValueChanged += new System.EventHandler(this.sliderAlphaLine_ValueChanged);
             // 
-            // itemFillSolid
-            // 
-            this.itemFillSolid.Image = ((System.Drawing.Image)(resources.GetObject("itemFillSolid.Image")));
-            this.itemFillSolid.Name = "itemFillSolid";
-            this.itemFillSolid.Size = new System.Drawing.Size(202, 26);
-            this.itemFillSolid.Text = "fill solid";
-            this.itemFillSolid.Click += new System.EventHandler(this.itemFillSolid_Click);
-            // 
-            // itemFillGradient
-            // 
-            this.itemFillGradient.Image = ((System.Drawing.Image)(resources.GetObject("itemFillGradient.Image")));
-            this.itemFillGradient.Name = "itemFillGradient";
-            this.itemFillGradient.Size = new System.Drawing.Size(202, 26);
-            this.itemFillGradient.Text = "fill linear gradient";
-            this.itemFillGradient.Click += new System.EventHandler(this.itemFillGradient_Click);
-            // 
-            // itemFillHatch
-            // 
-            this.itemFillHatch.Image = ((System.Drawing.Image)(resources.GetObject("itemFillHatch.Image")));
-            this.itemFillHatch.Name = "itemFillHatch";
-            this.itemFillHatch.Size = new System.Drawing.Size(202, 26);
-            this.itemFillHatch.Text = "fill hatch";
-            this.itemFillHatch.Click += new System.EventHandler(this.itemFillHatch_Click);
-            // 
-            // itemFillTexture
-            // 
-            this.itemFillTexture.Image = ((System.Drawing.Image)(resources.GetObject("itemFillTexture.Image")));
-            this.itemFillTexture.Name = "itemFillTexture";
-            this.itemFillTexture.Size = new System.Drawing.Size(202, 26);
-            this.itemFillTexture.Text = "fill texture";
-            this.itemFillTexture.Click += new System.EventHandler(this.itemFillTexture_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(186, 6);
-            // 
-            // itemRegion
-            // 
-            this.itemRegion.Image = ((System.Drawing.Image)(resources.GetObject("itemRegion.Image")));
-            this.itemRegion.Name = "itemRegion";
-            this.itemRegion.Size = new System.Drawing.Size(189, 34);
-            this.itemRegion.Text = "Region tool";
-            this.itemRegion.Click += new System.EventHandler(this.itemRegion_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -502,6 +512,43 @@ namespace _14520404_Paint
             this.label1.Size = new System.Drawing.Size(90, 17);
             this.label1.TabIndex = 6;
             this.label1.Text = "Transparent:";
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(230, 6);
+            // 
+            // toolMenuItemCopy
+            // 
+            this.toolMenuItemCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolMenuItemCopy.Image")));
+            this.toolMenuItemCopy.Name = "toolMenuItemCopy";
+            this.toolMenuItemCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.toolMenuItemCopy.Size = new System.Drawing.Size(233, 26);
+            this.toolMenuItemCopy.Text = "Copy";
+            this.toolMenuItemCopy.Click += new System.EventHandler(this.toolMenuItemCopy_Click);
+            // 
+            // toolMenuItemPaste
+            // 
+            this.toolMenuItemPaste.Image = ((System.Drawing.Image)(resources.GetObject("toolMenuItemPaste.Image")));
+            this.toolMenuItemPaste.Name = "toolMenuItemPaste";
+            this.toolMenuItemPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.toolMenuItemPaste.Size = new System.Drawing.Size(233, 26);
+            this.toolMenuItemPaste.Text = "Paste";
+            this.toolMenuItemPaste.Click += new System.EventHandler(this.toolMenuItemPaste_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(230, 6);
+            // 
+            // toolMenuItemDelete
+            // 
+            this.toolMenuItemDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolMenuItemDelete.Image")));
+            this.toolMenuItemDelete.Name = "toolMenuItemDelete";
+            this.toolMenuItemDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.toolMenuItemDelete.Size = new System.Drawing.Size(233, 26);
+            this.toolMenuItemDelete.Text = "Delete in \"region\"";
+            this.toolMenuItemDelete.Click += new System.EventHandler(this.toolMenuItemDelete_Click);
             // 
             // pnDrawing
             // 
@@ -591,6 +638,11 @@ namespace _14520404_Paint
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripMenuItem itemRegion;
         private Label label1;
+        private ToolStripSeparator toolStripSeparator9;
+        private ToolStripMenuItem toolMenuItemCopy;
+        private ToolStripMenuItem toolMenuItemPaste;
+        private ToolStripSeparator toolStripSeparator10;
+        private ToolStripMenuItem toolMenuItemDelete;
     }
     
 
